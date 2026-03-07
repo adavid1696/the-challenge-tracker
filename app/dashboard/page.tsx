@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 export default async function DashboardPage() {
 
 	const session = await getServerSession(authOptions)
-	console.log("this is the session: ", session)
+	console.log("this is the session: ", session?.user)
 
 	if(!session) redirect("/auth/login")
 
