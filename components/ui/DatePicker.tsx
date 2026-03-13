@@ -1,32 +1,20 @@
-"use client"
-
 import { dateFormat } from "@/lib/dateFormat";
-import { useState } from "react";
-import { DayPicker } from "react-day-picker";
+import { type DateRange, DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 
-function MyDatePicker() {
-  const [range, setRange] = useState<DateRange | undefined>();
+interface DatePickerProps {
+  range: DateRange | undefined
+  setRange: (range: DateRange | undefined) => void
+}
 
-  let footer = `Please pick the first day.`;
-  // if (range?.from) {
-  //   if (!range.to) {
-  //     footer = `${format(range.from, "PPP")}—`;
-  //   } else if (range.to) {
-  //     footer = `${format(range.from, "PPP")}—${format(range.to, "PPP")}`;
-  //   }
-  // }
+function MyDatePicker({range, setRange} : DatePickerProps) {
 
   return (
     <DayPicker
       mode="range"
       selected={range}
       onSelect={setRange}
-      footer={
-        range
-          ? dateFormat(range.from, range.to)
-          : "Pick a day."
-      }
+      footer={range?.from && range?.to ? <p className="whitespace-pre-line">{dateFormat(range.from, range.to)}</p> : "Pick a day."}
       // footer={
       //   selected ? `Selected: ${selected.toLocaleDateString()}` : "Pick a day."
       // }
