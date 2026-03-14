@@ -10,7 +10,6 @@ export default async function NewChallenge() {
 
 	return (
 		<div>
-			hi
 			<ChallengeForm userId={session.user.id}/>
 		</div>
 	)

@@ -12,9 +12,19 @@ function MyDatePicker({range, setRange} : DatePickerProps) {
   return (
     <DayPicker
       mode="range"
+      disabled={{ before: new Date() }}
+      min={2}
       selected={range}
       onSelect={setRange}
-      footer={range?.from && range?.to ? <p className="whitespace-pre-line">{dateFormat(range.from, range.to)}</p> : "Pick a day."}
+      footer={
+        range?.from && range?.to ? (
+          <p className="whitespace-pre-line">
+            {dateFormat(range.from, range.to)}
+          </p>
+        ) : (
+          "Pick a day."
+        )
+      }
       // footer={
       //   selected ? `Selected: ${selected.toLocaleDateString()}` : "Pick a day."
       // }
