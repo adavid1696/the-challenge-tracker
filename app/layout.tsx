@@ -27,9 +27,10 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{ background: "#0a0a0a", margin: 0 }}
       >
         {/* <SessionProvider> */}
-          {children}
+        {children}
         {/* </SessionProvider> */}
       </body>
     </html>

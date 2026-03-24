@@ -42,8 +42,8 @@ export default async function DashboardPage() {
 
   return (
 		<div>
-			in dashboard
-			<button>Create New Challenge</button>
+			Dashboard
+			{/* <button>Create New Challenge</button> */}
 			<ChallengeList allChallenges={allChallenges}/>
 		</div>
 	)
