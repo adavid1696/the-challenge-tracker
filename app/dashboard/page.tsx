@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
+import Link from "next/link";
 import ChallengeList from "@/components/challenges/ChallengeList";
 
 // user will see all their challnges in the dashboard and be able to create a new one from here
@@ -34,7 +35,7 @@ export default async function DashboardPage() {
 					},
 				})
 
-				console.log(allChallenges)
+				// console.log(allChallenges)
 
 	} catch (error) {
 		console.error(error)
@@ -42,7 +43,7 @@ export default async function DashboardPage() {
 
   return (
 		<div>
-			Dashboard
+			<Link href="/challenges/new-challenge">New Challenge</Link>
 			{/* <button>Create New Challenge</button> */}
 			<ChallengeList allChallenges={allChallenges}/>
 		</div>

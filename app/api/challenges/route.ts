@@ -25,21 +25,3 @@ export async function POST( req : Request) {
 		return new NextResponse("Internal Server Error", { status: 500 })
 	}
 }
-
-export async function GET(req: Request) {
-	try {
-		const allChallenges = await prisma.user.findUnique({
-			where: {
-				id: 4544654
-			},
-			include: {
-				challenges: true
-			}
-		})
-
-		console.log(allChallenges)
-	} catch (e) {
-		console.error("Error handling post request:", e);
-		return new NextResponse("Internal Server Error", { status: 500 });
-	}
-}
