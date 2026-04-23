@@ -7,11 +7,11 @@ export default function DeleteButton({ id } : {id : string}) {
 	const router = useRouter();
 
 	const handleClick = async () => {
-		console.log('in handle click')
+		
 		const res = await fetch(`/api/challenges/${id}`, {
 			method: 'DELETE'
 		})
-		console.log("this is the deleted one:", res)
+	
 
 		router.push('/dashboard')
 

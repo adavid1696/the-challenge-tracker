@@ -20,3 +20,22 @@ export async function DELETE(
     return new NextResponse("Internal Sever Eroor", { status: 500 });
   }
 }
+
+export async function PUT(
+  req: Request,
+  { params }: { params: { id: string } },
+) {
+  const { id } = await params;
+  const body = await req.json()
+
+  try {
+    const updateChallenge = await prisma.challenge.update({
+      where: { id },
+      data: body
+    });
+    return NextResponse.json(updateChallenge, { status: 201 });
+  } catch (e) {
+    console.error("Error handling update request", e);
+    return new NextResponse("Internal Sever Eroor", { status: 500 });
+  }
+}
