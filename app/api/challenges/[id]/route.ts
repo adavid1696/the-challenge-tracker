@@ -26,13 +26,15 @@ export async function PUT(
   { params }: { params: { id: string } },
 ) {
   const { id } = await params;
-  const body = await req.json()
+  
+  const body = await req.json();
 
   try {
     const updateChallenge = await prisma.challenge.update({
       where: { id },
       data: body
     });
+    
     return NextResponse.json(updateChallenge, { status: 201 });
   } catch (e) {
     console.error("Error handling update request", e);

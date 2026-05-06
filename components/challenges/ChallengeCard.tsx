@@ -2,16 +2,21 @@
 
 import { Challenge } from "@/app/dashboard/page";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function ChallengeCard({ challenge }: { challenge: Challenge }) {
+
+  const [startTime] = useState(() => Date.now())
+
 	const today = new Date()
   const start = new Date(challenge.startDate);
   const end = new Date(challenge.endDate);
+
   const totalDays = Math.round(
     (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24),
   );
   const daysPassed = Math.round(
-    (Date.now() - start.getTime()) / (1000 * 60 * 60 * 24),
+    (startTime - start.getTime()) / (1000 * 60 * 60 * 24),
   );
 
   const progress = Math.min(Math.max((daysPassed / totalDays) * 100, 0), 100);

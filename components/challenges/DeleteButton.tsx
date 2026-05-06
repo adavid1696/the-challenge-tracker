@@ -8,7 +8,7 @@ export default function DeleteButton({ id } : {id : string}) {
 
 	const handleClick = async () => {
 		
-		const res = await fetch(`/api/challenges/${id}`, {
+		await fetch(`/api/challenges/${id}`, {
 			method: 'DELETE'
 		})
 	
