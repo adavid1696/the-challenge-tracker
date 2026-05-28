@@ -7,6 +7,9 @@ import { prisma } from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import Link from "next/link"
+import MyDatePick from "@/components/ui/DayPicker";
+
+
 
 export default async function Challenges({
   params
@@ -16,11 +19,12 @@ export default async function Challenges({
   const session = await getServerSession(authOptions);
   //  need to add authenticaton to each route to keep code dry through middleware, this will be deleted.
   if (!session) redirect("/auth/login");
-	const {id} = await params
+  // challenge ID
+	const { id } = await params
 
   const challenge = await prisma.challenge.findFirst({
     where: {
-      id: id,
+      id,
       userId: session.user.id,
     },
   });
@@ -31,6 +35,7 @@ export default async function Challenges({
 
   return (
     <div>
+      <MyDatePick />
       <a href="/dashboard">Dashboard</a>
       <h1>{challenge.title}</h1>
       <p>{challenge.description}</p>
@@ -39,7 +44,9 @@ export default async function Challenges({
       <p>Active: {challenge.isActive ? "True" : "Fasle"}</p>
       <DeleteButton id={id} />
       <Link href={`/challenges/${id}/edit`}>Edit</Link>
-    
+      <Link href={`/challenges/${id}/progress`}>+ Log Todays Update</Link>
     </div>
   ); 
 };
+
+

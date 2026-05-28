@@ -7,7 +7,7 @@ interface DatePickerProps {
   setRange: (range: DateRange | undefined) => void
 }
 
-function MyDatePicker({range, setRange} : DatePickerProps) {
+export function MyDatePicker({range, setRange} : DatePickerProps) {
 
   return (
     <DayPicker
