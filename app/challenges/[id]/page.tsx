@@ -35,7 +35,7 @@ export default async function Challenges({
 
   return (
     <div>
-      <MyDatePick />
+      <MyDatePick id={challenge.id}/>
       <a href="/dashboard">Dashboard</a>
       <h1>{challenge.title}</h1>
       <p>{challenge.description}</p>

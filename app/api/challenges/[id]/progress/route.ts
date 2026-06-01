@@ -1,7 +1,8 @@
 import { authOptions } from "@/lib/auth";
+import { dateFormat } from "@/lib/dateFormat";
 import { prisma } from "@/lib/db";
 import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 
 export async function POST(req: Request) {
@@ -10,6 +11,7 @@ export async function POST(req: Request) {
   if (!session) return new NextResponse("Unauthorized", { status: 401 });
 
 	const data = await req.json();
+  
 	const { notes, id } = data;
 // verify if the challenge belongs to the user
 	const challenge = await prisma.challenge.findFirst({
@@ -26,7 +28,7 @@ export async function POST(req: Request) {
       data: {
         dayNumber: 1,
         notes,
-        completed: false,
+        completed: true,
         challenge: {
           connect: { id },
         },
@@ -49,3 +51,26 @@ export async function POST(req: Request) {
 //   challengeId String
 //   challenge   Challenge @relation(fields: [challengeId], references: [id])
 // }
+// api call to compare dates from date selected to the dates in the table
+// 2026-05-27T23:56:10.519Z
+export async function GET(req: NextRequest) {
+
+  const { searchParams } = req.nextUrl;
+  const data = searchParams.get('search')
+  console.log(data)
+  const date = new Date(data)
+  
+  try {
+    const daily = prisma.dailyProgress.findMany({
+      where: {
+        createdAt: {
+          contains: date
+        }
+      }
+    })
+
+    console.log(daily)
+  } catch (e) {
+    
+  }
+}
