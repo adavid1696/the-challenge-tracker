@@ -5,16 +5,16 @@ import { useState } from "react";
 export default function ProgressUpdateForm({ id }: { id: string }) {
   const [notes, setNotes] = useState("");
 
-  const handleSubmit = async () => {
-    const resp = await fetch(`/api/challenges/${id}/progress`, {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const resp = await fetch(`/api/challenges/${id}/progress/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         id,
-				notes,
-				
+        notes,
       }),
     });
 
